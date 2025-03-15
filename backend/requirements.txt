@@ -1,3 +1,14 @@
-langchain
-langchain_community
-openai
+fastapi
+uvicorn
+sqlalchemy
+mysql-connector-python
+python-dotenv
+selenium
+webdriver-manager
+beautifulsoup4
+requests
+weaviate-client
+pydantic
+logging
+re
+datetime
