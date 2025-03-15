@@ -36,7 +36,7 @@ This chatbot is designed using a hybrid approach that combines structured data r
 
 Below diagram represents the data pipeline for the Subway AI Chatbot, showing the flow from data extraction and storage to processing and user interaction.
 
-<h2 align="center">End-to-End Data Flow for Chatbot</h2>
+<p align="center"><b>End-to-End Data Flow for Chatbot</b></p>
 
 <p align="center">
   <img src="chatbot-pipeline.svg" alt="Chatbot Pipeline">
@@ -68,7 +68,7 @@ To address this, Weaviate was chosen instead because it supports both vector sea
 
 ---
 
-## Inaccurate Responses Due to LLM Model Limitations in Handling Structured Data
+### Inaccurate Responses Due to LLM Model Limitations in Handling Structured Data
 🛑 **Issue**
 When users asked “How many outlets are located in Bangsar?”, the chatbot sometimes returned incorrect numbers because:
 - LLaMA 3 is a language model, not a database—it cannot perform exact counting.
