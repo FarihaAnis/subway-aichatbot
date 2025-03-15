@@ -103,25 +103,25 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
 
 ## Tools & Technologies Used  
 
-### Data Collection & Processing
+#### Data Collection & Processing
 - **Web Scraping** – Extracts Subway outlet data from [Subway Malaysia](https://subway.com.my/find-a-subway).  
 - **Google Maps API** – Converts outlet addresses into latitude & longitude for mapping.  
 - **MySQL Database** – Stores structured details such as outlet names, addresses, and operating hours.  
 
-### Data Storage & Retrieval
+#### Data Storage & Retrieval
 - **Weaviate (Vector Database)** – Supports hybrid search using vector embeddings and keyword filtering.  
 - **Hybrid Search** – Enhances data retrieval by combining semantic and structured search capabilities.  
 
-### Backend Development
+#### Backend Development
 - **FastAPI** – Provides API endpoints for chatbot queries and data retrieval.  
 - **OpenRouter API** – Enables Llama-3 access for generating natural language responses.  
 - **Query Handling Functions** – Extracts structured responses (e.g., counting outlets, latest closing times).  
 
-### AI Model & Query Processing
+#### AI Model & Query Processing
 - **Llama-3 (via OpenRouter)** – Handles general chatbot queries requiring natural language understanding.  
 - **Structured Query Handling** – Separates structured queries from AI-generated responses to prevent hallucinations.  
 
-### Frontend Development
+#### Frontend Development
 - **React** – Builds an interactive UI for searching and displaying Subway outlet information.  
 - **Map Integration** – Retrieves geolocation data from MySQL to visualize outlets.  
 
@@ -131,18 +131,18 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
 
 Currently, the chatbot only returns a single outlet when answering queries like: *"Which Subway outlet closes the latest?"*
 
-### 🔹 **Expected Response:**  
+#### **Expected Response:**  
 > "The latest closing Subway outlets close at 10:30 PM. These outlets include:  
 > - **Subway Sri Gombak** (Closes at 10:30 PM every day)  
 > - **Subway Aeon Taman Maluri** (Closes at 10:30 PM on Friday & Saturday)"
 
-### 🔹 **Current Issue:**  
+#### **Current Issue:**  
 - The chatbot only returns one outlet (e.g., *"Subway Sri Gombak"*) even when multiple outlets have the latest closing time but on different days.  
 
-### 🔹 **Cause:**  
+#### **Cause:**  
 - The logic currently does not account for outlets with different closing times on specific days.  
 - If an outlet closes the latest only on certain days, it gets excluded from the response.  
 
-### 🛠 **Proposed Fix**
+#### 🛠 **Proposed Fix**
 - Update the `extract_closing_time()` function to identify all outlets that have the latest closing time, even if they differ based on the day of the week.  
 - Modify how results are grouped and formatted ensuring outlets with variable closing times are correctly included in the response.  
