@@ -62,7 +62,7 @@
    - Wait until the search results appear before extracting data.
 6. **Inspect the HTML Structure**
    - Use "View Page Source" or Developer Tools (Inspect Element) to identify where the data is stored.
-   - Locate container <div> tags, headers <h4>, and paragraphs <p> that hold outlet details.
+   - Locate container `<div>` tags, headers `<h4>`, and paragraphs `<p>` that hold outlet details.
 7. **Extract Outlet Details**
    - Define `extract_data(page_soup)` function to extract name, address, operating hours, latitude, longitude, and Waze link from the page.
    - Use BeautifulSoup to to find and process these elements in the HTML.
