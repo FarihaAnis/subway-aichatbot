@@ -143,8 +143,9 @@
     uvicorn app:app --reload
     ```
 
+<p align="center"><b>Query Processing Workflow For Retrieving and Responding To User Queries</b></p>
 <p align="center">
   <img src="chatbot-workflow.png" alt="Chatbot Workflow">
 </p>
 
-<p align="center"><b>Chatbot Workflow</b></p>
+
