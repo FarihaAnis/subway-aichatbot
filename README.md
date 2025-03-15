@@ -34,7 +34,7 @@ This chatbot is designed using a hybrid approach that combines structured data r
 
 <br>
 
-<p align="center"><b>Demonstration of the Subway AI Chatbot and Interactive Map.</b></p>
+<p align="center"><b>Demonstration of the Subway AI Chatbot and Interactive Map</b></p>
 
 <p align="center">
   <img src="demo.gif" alt="Chatbot Demo">
