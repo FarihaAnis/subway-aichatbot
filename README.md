@@ -61,10 +61,13 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
 
 ### VectorDatabase
 🛑 **Issue**
-- Pinecone was used as the vector database to help the chatbot handle semantic queries. However, Pinecone is optimized for unstructured text search using embeddings and does not natively support filtering structured data like outlet names, addresses, and operating hours. This led to challenges in retrieving precise results, sometimes causing hallucinations in responses.
+- Pinecone was initially used as the vector database to handle semantic queries for the chatbot. However, Pinecone is optimized for unstructured text search using embeddings and does not natively support filtering structured data (e.g., outlet names, addresses, and operating hours).
+- This limitation made it difficult to retrieve precise results when handling structured queries, sometimes causing hallucinations or incorrect responses when trying to match specific locations or business hours.
 
 🛠️ **Troubleshooting & Fix**
-- To address this, Weaviate was chosen instead because it supports both vector search (semantic similarity) and keyword-based filtering. This provides more flexibility in handling both structured data (e.g., filtering by city, exact outlet name) and unstructured queries.
+- Weaviate was chosen as a replacement because it supports both vector search (semantic similarity) and keyword-based filtering, making it more suitable for handling both structured and unstructured queries.
+- This change allows the chatbot to filter by city, outlet name, or specific attributes while still leveraging semantic search for conversational queries.
+- However, Weaviate’s free Sandbox tier is available for only 14 days, making it more suitable for learning and prototyping rather than long-term production use.
 
 ---
 
@@ -96,10 +99,50 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
    - Extracts and processes operating hours, handling multiple closing times and public holiday variations.
    - Identifies the latest closing outlet and returns an accurate response, without relying on LLaMA 3.
 
+---
 
+## Tools & Technologies Used  
 
+### Data Collection & Processing
+- **Web Scraping** – Extracts Subway outlet data from [Subway Malaysia](https://subway.com.my/find-a-subway).  
+- **Google Maps API** – Converts outlet addresses into latitude & longitude for mapping.  
+- **MySQL Database** – Stores structured details such as outlet names, addresses, and operating hours.  
 
+### Data Storage & Retrieval
+- **Weaviate (Vector Database)** – Supports hybrid search using vector embeddings and keyword filtering.  
+- **Hybrid Search** – Enhances data retrieval by combining semantic and structured search capabilities.  
 
+### Backend Development
+- **FastAPI** – Provides API endpoints for chatbot queries and data retrieval.  
+- **OpenRouter API** – Enables Llama-3 access for generating natural language responses.  
+- **Query Handling Functions** – Extracts structured responses (e.g., counting outlets, latest closing times).  
 
+### AI Model & Query Processing
+- **Llama-3 (via OpenRouter)** – Handles general chatbot queries requiring natural language understanding.  
+- **Structured Query Handling** – Separates structured queries from AI-generated responses to prevent hallucinations.  
 
+### Frontend Development
+- **React** – Builds an interactive UI for searching and displaying Subway outlet information.  
+- **Map Integration** – Retrieves geolocation data from MySQL to visualize outlets.  
 
+---
+
+## **FUTURE IMPROVEMENTS**  
+
+Currently, the chatbot only returns a single outlet when answering queries like: *"Which Subway outlet closes the latest?"*
+
+### 🔹 **Expected Response:**  
+> "The latest closing Subway outlets close at 10:30 PM. These outlets include:  
+> - **Subway Sri Gombak** (Closes at 10:30 PM every day)  
+> - **Subway Aeon Taman Maluri** (Closes at 10:30 PM on Friday & Saturday)"
+
+### 🔹 **Current Issue:**  
+- The chatbot only returns one outlet (e.g., *"Subway Sri Gombak"*) even when multiple outlets have the latest closing time but on different days.  
+
+### 🔹 **Cause:**  
+- The logic currently does not account for outlets with different closing times on specific days.  
+- If an outlet closes the latest only on certain days, it gets excluded from the response.  
+
+### 🛠 **Proposed Fix**
+- Update the `extract_closing_time()` function to identify all outlets that have the latest closing time, even if they differ based on the day of the week.  
+- Modify how results are grouped and formatted ensuring outlets with variable closing times are correctly included in the response.  
