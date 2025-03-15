@@ -39,7 +39,7 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
 <p align="center"><b>End-to-End Data Flow for Chatbot</b></p>
 
 <p align="center">
-  <img src="chatbot-pipeline.svg" alt="Chatbot Pipeline">
+  <img src="chatbot-pipeline.png" alt="Chatbot Pipeline">
 </p>
 
 ---
