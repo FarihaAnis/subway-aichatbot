@@ -61,41 +61,40 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
 
 ### VectorDatabase
 🛑 **Issue**
-Pinecone was used as the vector database to help the chatbot handle semantic queries. However, Pinecone is optimized for unstructured text search using embeddings and does not natively support filtering structured data like outlet names, addresses, and operating hours. This led to challenges in retrieving precise results, sometimes causing hallucinations in responses.
+- Pinecone was used as the vector database to help the chatbot handle semantic queries. However, Pinecone is optimized for unstructured text search using embeddings and does not natively support filtering structured data like outlet names, addresses, and operating hours. This led to challenges in retrieving precise results, sometimes causing hallucinations in responses.
 
 🛠️ **Troubleshooting & Fix**
-To address this, Weaviate was chosen instead because it supports both vector search (semantic similarity) and keyword-based filtering. This provides more flexibility in handling both structured data (e.g., filtering by city, exact outlet name) and unstructured queries.
+- To address this, Weaviate was chosen instead because it supports both vector search (semantic similarity) and keyword-based filtering. This provides more flexibility in handling both structured data (e.g., filtering by city, exact outlet name) and unstructured queries.
 
 ---
 
 ### Inaccurate Responses Due to LLM Model Limitations in Handling Structured Data
 🛑 **Issue**
-When users asked “How many outlets are located in Bangsar?”, the chatbot sometimes returned incorrect numbers because:
-- LLaMA 3 is a language model, not a database—it cannot perform exact counting.
-- Weaviate retrieves a limited subset of records, causing LLaMA 3 to estimate the count instead of providing an exact answer.
-- LLMs can hallucinate when handling numeric queries, leading to inconsistent responses.
+- When users asked “How many outlets are located in Bangsar?”, the chatbot sometimes returned incorrect numbers because:
+   - LLaMA 3 is a language model, not a database—it cannot perform exact counting.
+   - Weaviate retrieves a limited subset of records, causing LLaMA 3 to estimate the count instead of providing an exact answer.
+   - LLMs can hallucinate when handling numeric queries, leading to inconsistent responses.
 
 🛠️ **Troubleshooting & Fix**
-To ensure accuracy, the chatbot now manually processes structured queries instead of relying on LLaMA 3.
-
+- To ensure accuracy, the chatbot now manually processes structured queries instead of relying on LLaMA 3.
 - Implemented handle_count_query to directly count the number of outlets based on location.
 - Retrieves relevant outlets from Weaviate before processing the count.
 - Filters and matches location names accurately, preventing miscounts.
 - Returns the exact count without using LLaMA 3, ensuring a reliable response.
 
 🛑 **Issue**
-When users ask “Which Subway outlet closes the latest?”, the chatbot sometimes returns incorrect results because:
-- LLaMA 3 cannot sort operating hours correctly since they are stored as text in various formats.
-- Some outlets have multiple closing times, such as different hours for weekdays, weekends, and public holidays, making it harder to determine the latest closing time.
-- LLaMA 3 hallucinates responses, returning inconsistent results that do not answer the query accurately.
+- When users ask “Which Subway outlet closes the latest?”, the chatbot sometimes returns incorrect results because:
+   - LLaMA 3 cannot sort operating hours correctly since they are stored as text in various formats.
+   - Some outlets have multiple closing times, such as different hours for weekdays, weekends, and public holidays, making it harder to determine the latest closing time.
+   - LLaMA 3 hallucinates responses, returning inconsistent results that do not answer the query accurately.
 
 🛠️ **Troubleshooting & Fix**
-To resolve this issue, two functions, convert_to_24_hour(time_str) and extract_closing_time(hours_text), were added to properly process closing times before sorting. These functions ensure the chatbot:
-- Detects if the query is about closing times and determines the user's intent.
-- Retrieves relevant outlets from Weaviate using hybrid search.
-- Standardizes time formats to a 24-hour format for accurate comparison.
-- Extracts and processes operating hours, handling multiple closing times and public holiday variations.
-- Identifies the latest closing outlet and returns an accurate response, without relying on LLaMA 3.
+- To resolve this issue, two functions, convert_to_24_hour(time_str) and extract_closing_time(hours_text), were added to properly process closing times before sorting. These functions ensure the chatbot:
+   - Detects if the query is about closing times and determines the user's intent.
+   - Retrieves relevant outlets from Weaviate using hybrid search.
+   - Standardizes time formats to a 24-hour format for accurate comparison.
+   - Extracts and processes operating hours, handling multiple closing times and public holiday variations.
+   - Identifies the latest closing outlet and returns an accurate response, without relying on LLaMA 3.
 
 
 
