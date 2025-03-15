@@ -44,7 +44,7 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
 
 ---
 
-## ISSUE & TROUBLESHOOTING
+## Issue & Troubleshooting
 ### Webscrapping
 🛑 **Issue**
 - Only the first `<p>` inside `<div class="infoboxcontent">` was extracted, so the rest of the operating hours were missing because they were inside a nested `<div>` container, not directly under `<div class="location_left">`.
