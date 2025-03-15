@@ -32,6 +32,14 @@ This chatbot is designed using a hybrid approach that combines structured data r
   <img src="chatbot-workflow.png" alt="Chatbot Workflow">
 </p>
 
+<br>
+
+<p align="center"><b>Demonstration of the Subway AI Chatbot and Interactive Map.</b></p>
+
+<p align="center">
+  <img src="demo.gif" alt="Chatbot Demo">
+</p>
+
 ---
 
 Below diagram represents the data pipeline for the Subway AI Chatbot, showing the flow from data extraction and storage to processing and user interaction.
