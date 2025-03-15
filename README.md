@@ -12,14 +12,17 @@ This chatbot is designed using a hybrid approach that combines structured data r
 ◽Hybrid Retrieval (Vector + Keyword Search)
    - Uses Weaviate’s hybrid search to retrieve relevant Subway outlets based on semantic similarity (vector search) and exact keyword matches (filtering).
    - This allows it to retrieve structured outlet details (e.g., addresses, operating hours) with high accuracy.
+
 ◽Structured Query Handling (Without RAG)
    - Instead of passing all retrieved data to LLaMA 3, the chatbot processes structured queries separately:
       - Counting outlets: Uses handle_count_query() to return an exact count.
       - Sorting by closing time: Uses extract_closing_time() and convert_to_24_hour() to normalize and compare operating hours.
    - These queries are resolved without using the LLM, preventing hallucinations.
+
 ◽ LLM for Open-Ended Queries Only
    - LLaMA 3 is only used when natural language understanding is required (e.g., “Tell me about Subway in Bangsar”).
    - The chatbot formats retrieved outlet details and constructs a structured prompt before sending it to LLaMA 3.
+
 ◽ Preventing Hallucination
    - The chatbot only sends relevant, pre-processed data to LLaMA 3, instead of raw retrieval results.
    - This ensures accurate structured responses while still allowing flexibility for general queries.
