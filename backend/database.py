@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # ✅ Database Configuration
-DB_URL = "mysql+mysqlconnector://root:root@localhost:3306/subway_db"
+DB_URL = "mysql+mysqlconnector://username:password@localhost:3306/subway_db"
 engine = create_engine(DB_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
