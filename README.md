@@ -5,6 +5,32 @@ This document provides an overview of the Subway AI Chatbot's architecture, data
 
 ---
 
+## Tools & Technologies Used  
+
+#### Data Collection & Processing
+- **Web Scraping** – Extracts Subway outlet data from [Subway Malaysia](https://subway.com.my/find-a-subway).  
+- **Google Maps API** – Converts outlet addresses into latitude & longitude for mapping.  
+- **MySQL Database** – Stores structured details such as outlet names, addresses, and operating hours.  
+
+#### Data Storage & Retrieval
+- **Weaviate (Vector Database)** – Supports hybrid search using vector embeddings and keyword filtering.  
+- **Hybrid Search** – Enhances data retrieval by combining semantic and structured search capabilities.  
+
+#### Backend Development
+- **FastAPI** – Provides API endpoints for chatbot queries and data retrieval.  
+- **OpenRouter API** – Enables Llama-3 access for generating natural language responses.  
+- **Query Handling Functions** – Extracts structured responses (e.g., counting outlets, latest closing times).  
+
+#### AI Model & Query Processing
+- **Llama-3 (via OpenRouter)** – Handles general chatbot queries requiring natural language understanding.  
+- **Structured Query Handling** – Separates structured queries from AI-generated responses to prevent hallucinations.  
+
+#### Frontend Development
+- **React** – Builds an interactive UI for searching and displaying Subway outlet information.  
+- **Map Integration** – Retrieves geolocation data from MySQL to visualize outlets.  
+
+---
+
 ## Chatbot Architecture & Query Processing
 This chatbot is designed using a hybrid approach that combines structured data retrieval and LLM-powered responses. Unlike traditional RAG (Retrieval-Augmented Generation), which retrieves unstructured text from a vector database and passes it to an LLM, this chatbot directly processes structured queries without relying on an LLM for factual accuracy.
 
@@ -106,32 +132,6 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
    - Standardizes time formats to a 24-hour format for accurate comparison.
    - Extracts and processes operating hours, handling multiple closing times and public holiday variations.
    - Identifies the latest closing outlet and returns an accurate response, without relying on LLaMA 3.
-
----
-
-## Tools & Technologies Used  
-
-#### Data Collection & Processing
-- **Web Scraping** – Extracts Subway outlet data from [Subway Malaysia](https://subway.com.my/find-a-subway).  
-- **Google Maps API** – Converts outlet addresses into latitude & longitude for mapping.  
-- **MySQL Database** – Stores structured details such as outlet names, addresses, and operating hours.  
-
-#### Data Storage & Retrieval
-- **Weaviate (Vector Database)** – Supports hybrid search using vector embeddings and keyword filtering.  
-- **Hybrid Search** – Enhances data retrieval by combining semantic and structured search capabilities.  
-
-#### Backend Development
-- **FastAPI** – Provides API endpoints for chatbot queries and data retrieval.  
-- **OpenRouter API** – Enables Llama-3 access for generating natural language responses.  
-- **Query Handling Functions** – Extracts structured responses (e.g., counting outlets, latest closing times).  
-
-#### AI Model & Query Processing
-- **Llama-3 (via OpenRouter)** – Handles general chatbot queries requiring natural language understanding.  
-- **Structured Query Handling** – Separates structured queries from AI-generated responses to prevent hallucinations.  
-
-#### Frontend Development
-- **React** – Builds an interactive UI for searching and displaying Subway outlet information.  
-- **Map Integration** – Retrieves geolocation data from MySQL to visualize outlets.  
 
 ---
 
