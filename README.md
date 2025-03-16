@@ -153,4 +153,11 @@ Currently, the chatbot only returns a single outlet when answering queries like:
 
 #### 🛠 **Proposed Fix**
 - Update the `extract_closing_time()` function to identify all outlets that have the latest closing time, even if they differ based on the day of the week.  
-- Modify how results are grouped and formatted ensuring outlets with variable closing times are correctly included in the response.  
+- Modify how results are grouped and formatted ensuring outlets with variable closing times are correctly included in the response.
+
+---
+
+## Documentation
+[Weaviate Documentation](https://weaviate.io/developers/weaviate)
+<br>
+[OpenRouter Documentation](https://openrouter.ai/docs/quickstart)
