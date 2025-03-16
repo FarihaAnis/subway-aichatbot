@@ -135,7 +135,7 @@ Below diagram represents the data pipeline for the Subway AI Chatbot, showing th
 
 ---
 
-## **FUTURE IMPROVEMENTS**  
+## **Future Improvements**  
 
 Currently, the chatbot only returns a single outlet when answering queries like: *"Which Subway outlet closes the latest?"*
 
